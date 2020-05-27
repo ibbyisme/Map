@@ -1,0 +1,56 @@
+apply plugin: 'com.android.application'
+
+android {
+    signingConfigs {
+        debug {
+            storeFile file('C:\\Users\\乔哥\\.android\\debug.keystore')
+            storePassword '123456'
+            keyPassword '123456'
+        }
+    }
+    compileSdkVersion 29
+    buildToolsVersion "29.0.3"
+
+    //compile 'com.github.hotchemi:permissionsdispatcher:2.2.0'
+    //annotationProcessor 'com.github.hotchemi:permissionsdispatcher-processor:2.2.0'
+    defaultConfig {
+        applicationId "com.example.map"
+        minSdkVersion 28
+        targetSdkVersion 29
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    /*sourceSets{
+        main{
+            jniLibs.srcDirs=['libs']
+        }
+    }*/
+    /*sourceSets{
+        main{
+            jniLibs.srcDir 'libs'
+            jni.srcDirs = []    //disable automatic ndk-build
+        }
+    }*/
+}
+dependencies {
+    //implementation 'com.android.support:percent:27.0.2'
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    //
+
+    //
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    //implementation 'com.android.support:percent:27.1.1'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+}

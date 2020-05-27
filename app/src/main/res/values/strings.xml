@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Map</string>
+    <string name="百度地图">百度地图</string>
+    <string name="范围">范围</string>
+    <string name="围栏范围">围栏范围</string>
+    <string name="确认">确认</string>
+    <string name="圆形围栏">圆形围栏</string>
+    <string name="多边形围栏">多边形围栏</string>
+    <string name="取消">取消</string>
+    <string name="圆形">圆形</string>
+    <string name="多边形">多边形</string>
+    <string name="历史记录">历史记录</string>
+    <string name="客户端围栏">客户端围栏</string>
+    <string name="客户">客户</string>
+    <string name="服务端">服务端</string>
+    <string name="添加">添加</string>
+    <string name="定点">定点</string>
+    <string name="绑定">绑定</string>
+</resources>
