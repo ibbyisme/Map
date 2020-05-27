@@ -53,61 +53,11 @@ import com.baidu.mapapi.map.Stroke;
 import com.baidu.mapapi.model.LatLng;
 import com.baidu.mapapi.model.inner.GeoPoint;
 import com.baidu.trace.LBSTraceClient;
-import com.baidu.trace.Trace;
-import com.baidu.trace.api.entity.AddEntityRequest;
-import com.baidu.trace.api.entity.AddEntityResponse;
-import com.baidu.trace.api.entity.LocRequest;
 import com.baidu.trace.api.entity.OnEntityListener;
-import com.baidu.trace.api.fence.AddMonitoredPersonRequest;
-import com.baidu.trace.api.fence.AddMonitoredPersonResponse;
-import com.baidu.trace.api.fence.AlarmPoint;
-import com.baidu.trace.api.fence.CircleFence;
-import com.baidu.trace.api.fence.CreateFenceResponse;
-import com.baidu.trace.api.fence.DeleteFenceRequest;
-import com.baidu.trace.api.fence.DeleteFenceResponse;
-import com.baidu.trace.api.fence.DeleteMonitoredPersonResponse;
-import com.baidu.trace.api.fence.FenceAlarmInfo;
-import com.baidu.trace.api.fence.FenceAlarmPushInfo;
-import com.baidu.trace.api.fence.FenceInfo;
-import com.baidu.trace.api.fence.FenceListRequest;
-import com.baidu.trace.api.fence.FenceListResponse;
-import com.baidu.trace.api.fence.FenceType;
-import com.baidu.trace.api.fence.HistoryAlarmRequest;
-import com.baidu.trace.api.fence.HistoryAlarmResponse;
-import com.baidu.trace.api.fence.ListMonitoredPersonRequest;
-import com.baidu.trace.api.fence.ListMonitoredPersonResponse;
-import com.baidu.trace.api.fence.MonitoredAction;
-import com.baidu.trace.api.fence.MonitoredStatus;
-import com.baidu.trace.api.fence.MonitoredStatusByLocationRequest;
-import com.baidu.trace.api.fence.MonitoredStatusByLocationResponse;
-import com.baidu.trace.api.fence.MonitoredStatusInfo;
-import com.baidu.trace.api.fence.MonitoredStatusRequest;
-import com.baidu.trace.api.fence.MonitoredStatusResponse;
-import com.baidu.trace.api.fence.OnFenceListener;
-import com.baidu.trace.api.fence.PolygonFence;
-import com.baidu.trace.api.fence.UpdateFenceResponse;
-import com.baidu.trace.api.track.AddPointResponse;
-import com.baidu.trace.api.track.HistoryTrackRequest;
-import com.baidu.trace.api.track.HistoryTrackResponse;
-import com.baidu.trace.api.track.LatestPointResponse;
-import com.baidu.trace.api.track.OnTrackListener;
-import com.baidu.trace.api.track.SupplementMode;
-import com.baidu.trace.api.track.TrackPoint;
-import com.baidu.trace.model.BaseRequest;
-import com.baidu.trace.model.CoordType;
+
 import com.baidu.location.BDAbstractLocationListener;
 import com.baidu.location.BDLocation;
-import com.baidu.trace.api.fence.CreateFenceRequest;
-import com.baidu.trace.model.LocationMode;
-import com.baidu.trace.model.OnCustomAttributeListener;
 import com.baidu.trace.model.OnTraceListener;
-import com.baidu.trace.model.ProcessOption;
-import com.baidu.trace.model.PushMessage;
-import com.baidu.trace.model.SortType;
-import com.baidu.trace.model.StatusCodes;
-import com.baidu.trace.model.TraceLocation;
-import com.baidu.trace.model.TransportMode;
-//import com.baidu.trace.
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -175,12 +125,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onGeoFenceCreateFinished(List<GeoFence> list, int i, String s) {
                 if(i==GeoFence.ADDGEOFENCE_SUCCESS){
-                    //Toast.makeText(MainActivity.this,"围栏添加成功",Toast.LENGTH_LONG).show();
-                }
+                    Toast.makeText(MainActivity.this,"围栏添加成功",Toast.LENGTH_LONG).show(); }
                 else
-                {
-                    //Toast.makeText(MainActivity.this,"围栏添加失败",Toast.LENGTH_LONG).show();
-                }
+                {Toast.makeText(MainActivity.this,"围栏添加失败",Toast.LENGTH_LONG).show();}
             }
         };
         geoFenceClient.createPendingIntent(GEOFENCE_BROADCAST_ACTION);
@@ -206,7 +153,6 @@ public class MainActivity extends AppCompatActivity {
         geoFenceClient.addGeoFence(centerPoint,GeoFenceClient.BD09LL,800,"监控");
         baiduMap.addOverlay(new CircleOptions().center(center).radius(800).
                 fillColor(0xAA0000FF).stroke(new Stroke(5,0xAA00ff00)));
-        //builder.include(center);
     }
     public void creatPloy(){
         ArrayList<DPoint> points=new ArrayList<>();
@@ -221,7 +167,6 @@ public class MainActivity extends AppCompatActivity {
         geoFenceClient.addGeoFence(points,GeoFenceClient.BD09LL,"多边形");
         baiduMap.addOverlay(new PolygonOptions().points(latLngs).
                 fillColor(0xAAff0000).stroke(new Stroke(5,0xAA00FF00)));
-
     }
     private BroadcastReceiver broadcastReceiver=new BroadcastReceiver() {
         @Override
@@ -235,11 +180,11 @@ public class MainActivity extends AppCompatActivity {
                     case GeoFence.INIT_STATUS_IN:
                         System.out.println("围栏初始状态:在围栏内--"+fenceId);
                         Toast.makeText(MainActivity.this,"正在围栏内",Toast.LENGTH_LONG).show();
-                        //smsManager.sendTextMessage(phone,null,"你进入了围栏",pendingIntent,null);
+                        smsManager.sendTextMessage(phone,null,"你进入了围栏",pendingIntent,null);
                         break;
                     case GeoFence.INIT_STATUS_OUT:
                         System.out.println("围栏初始状态:在围栏外"+fenceId);
-                        //smsManager.sendTextMessage(phone,null,"你离开了围栏",pendingIntent,null);
+                        smsManager.sendTextMessage(phone,null,"你离开了围栏",pendingIntent,null);
                         Toast.makeText(MainActivity.this,"正在围栏外",Toast.LENGTH_LONG).show();
                         break;
                     case GeoFence.STATUS_LOCFAIL:
@@ -249,10 +194,10 @@ public class MainActivity extends AppCompatActivity {
                     case GeoFence.STATUS_IN:
                         System.out.println("进入围栏 "+fenceId);
                         Toast.makeText(MainActivity.this,"进入围栏",Toast.LENGTH_LONG).show();
-                        //smsManager.sendTextMessage(phone,null,"你进入了围栏",pendingIntent,null);
+                        smsManager.sendTextMessage(phone,null,"你进入了围栏",pendingIntent,null);
                         break;
                     case GeoFence.STATUS_OUT:
-                        //smsManager.sendTextMessage(phone,null,"你离开了围栏",pendingIntent,null);
+                        smsManager.sendTextMessage(phone,null,"你离开了围栏",pendingIntent,null);
                         System.out.println("离开围栏 "+fenceId);
                         Toast.makeText(MainActivity.this,"离开围栏",Toast.LENGTH_LONG).show();
                         break;
@@ -314,9 +259,7 @@ public class MainActivity extends AppCompatActivity {
     public void inistart()
     {
         LocationClientOption moption=new LocationClientOption();
-
         moption.setLocationMode(LocationClientOption.LocationMode.Hight_Accuracy);
-
         moption.setOpenGps(true);
         moption.setCoorType("bd0911");
         moption.setScanSpan(2000);
